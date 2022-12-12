@@ -1,0 +1,61 @@
+{
+  	"Lua.telemetry.enable": false,
+  	"snippet.highlight": true,
+	
+  	"emmet.excludeLanguages": [],
+	"emmet.includeLanguages": {"vue-html": "html", "javascript": "javascriptreact"},
+  	"html.format.indentInnerHtml": true,
+
+	// Diagnositc settigns
+ 	"diagnostic.virtualText": false,
+    "diagnostic.autoRefresh": true,
+    "diagnostic.infoSign": " ",
+    "diagnostic.errorSign": " ",
+    "diagnostic.hintSign": " ",
+    "diagnostic.warningSign": " ",
+ 	"diagnostic.messageTarget": false,
+ 	// Trying out configs
+    "diagnostic.enableSign": true, 
+    "diagnostic.enableHighlightLineNumber": true,
+    "diagnostic.messageTarget": "float",
+    "diagnostic.virtualTextAlignRight": false,
+    "diagnostic.virtualTextCurrentLineOnly": false,
+    "diagnostic.messageDelay": 10,
+    "codeLens.enable": true,
+
+	// ItemKind icons
+	"suggest.completionItemKindLabels": {
+		"text": " ",
+		"method": " ",
+		"function": " ",
+		"constructor": " ",
+		"field": " ",
+		"variable": " ",
+		"class": " ",
+		"interface": " ",
+		"module": " ",
+		"Property": " ",
+		"unit": " ",
+		"value": " ",
+		"enum": " ",
+		"keyword": " ",
+		"snippet": " ",
+		"color": " ",
+		"file": " ",
+		"reference": " ",
+		"folder": " ",
+		"enumMember": " ",
+		"constant": " ",
+		"struct": " ",
+		"event": " ",
+		"operator": " ",
+		"typeParameter": " ",
+		"misc": " ",
+	},
+
+	 // coc-tsserver
+    "typescript.check.npmIsInstalled": true,
+    "typescript.preferences.quoteStyle": "double",
+    "tsserver.disableAutomaticTypeAcquisition": false, // Defaut is false, but just in case. In here because of nvm
+    "javascript.preferences.quoteStyle": "double"
+}

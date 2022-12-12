@@ -1,0 +1,71 @@
+#! /bin/sh
+
+
+
+if [[ $(xrandr -q | grep "HDMI1 connected" | cut -d ' ' -f1) ]]; then
+    xrandr --output eDP1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DP1 --off --output HDMI1 --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI2 --off --output VIRTUAL1 --off
+    bspc monitor eDP1 -d 1 2 3 4 5 6
+    #bspc monitor HDMI1 -d 7 8 9 0
+    #bspc monitor eDP1 -s HDMI1
+else
+    bspc monitor eDP1 -d 1 2 3 4 5 6
+fi
+
+
+
+
+#bspc config border_width         2
+#bspc config window_gap          12
+
+bspc config split_ratio          0.52
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+
+bspc config borderless_monocle true
+bspc config border_width                1
+bspc config window_gap                  10
+
+
+
+bspc rule -a Gimp desktop='^8'          state=floating follow=on
+bspc rule -a mplayer2                   state=floating
+bspc rule -a Kupfer.py                  focus=on
+bspc rule -a Screenkey                  manage=off
+
+bspc rule -a albert                     state=floating  focus=true
+bspc rule -a feh                        state=floating
+bspc rule -a Pavucontrol                state=floating
+bspc rule -a rofi                       state=floating
+bspc rule -a Gnome-disks                state=tiled
+
+bspc rule -a Zathura                    state=tiled
+bspc rule -a firefox                    desktop='^1' follow=on
+bspc rule -a mpv                        state=floating follow=on
+bspc rule -a Toolkit                    state=floating follow=on
+bspc rule -a Thunar                     state=floating
+#bspc rule -a ranger                     state=floating hidden=on sticky=on 
+
+
+bspc rule -a firefox:Toolkit:Picture-in-Picture state=floating
+bspc rule -a firefox:*:Picture-in-Picture state=floating
+bspc rule -a *:Toolkit:Picture-in-Picture state=floating
+bspc rule -a *:*:Picture-in-Picture state=floating
+
+bspc rule -a *:SPLASH state=floating
+bspc desktop -f 1
+
+
+bspc config focused_border_color \#449dab
+
+
+
+pgrep -x sxhkd > /dev/null || sxhkd &
+xsetroot -cursor_name left_ptr &
+ /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+ /usr/lib/gsd-xsettings &
+ # picom --experimental-backends --backend glx -b &
+ picom &
+
+ feh --no-fehbg --bg-fill ~/Imágenes/52.png &
+
+sh ~/.config/polybar/launch.sh --forest
