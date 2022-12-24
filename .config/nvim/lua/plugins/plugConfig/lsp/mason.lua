@@ -11,9 +11,12 @@ end
 local servers = {
 	"sumneko_lua",
 	"pyright",
-    "tsserver"
+	"tsserver",
+	"clangd",
+    "cssls",
+    "html",
+    "emmet_ls"
 }
-
 
 local settings = {
 	ui = {
@@ -34,12 +37,10 @@ mason_lspconfig.setup({
 	automatic_installation = true,
 })
 
-
 local lspconfig_status_ok, lspconfig = pcall(require, "lspconfig")
 if not lspconfig_status_ok then
 	return
 end
-
 
 local opts = {}
 for _, server in pairs(servers) do
@@ -48,18 +49,23 @@ for _, server in pairs(servers) do
 		capabilities = require("plugins.plugConfig.lsp.handlers").capabilities,
 	}
 
-    if server == "tsserver" then
-        local tsserver_opts = require("plugins.plugConfig.lsp.settings.tsserver")
-        opts = vim.tbl_deep_extend("force", tsserver_opts, opts)
-    end
-	if server == 'sumneko_lua' then
-		local sumneko_opts = require('plugins.plugConfig.lsp.settings.sumneko_lua')
+	if server == "tsserver" then
+		local tsserver_opts = require("plugins.plugConfig.lsp.settings.tsserver")
+		opts = vim.tbl_deep_extend("force", tsserver_opts, opts)
+	end
+	if server == "sumneko_lua" then
+		local sumneko_opts = require("plugins.plugConfig.lsp.settings.sumneko_lua")
 		opts = vim.tbl_deep_extend("force", sumneko_opts, opts)
 	end
 
-	if server == 'pyright' then
-		local pyright_opts = require('plugins.plugConfig.lsp.settings.pyright')
+	if server == "pyright" then
+		local pyright_opts = require("plugins.plugConfig.lsp.settings.pyright")
 		opts = vim.tbl_deep_extend("force", pyright_opts, opts)
+	end
+
+	if server == "clangd" then
+		local clangd_opts = require("plugins.plugConfig.lsp.settings.clangd")
+		opts = vim.tbl_deep_extend("force", clangd_opts, opts)
 	end
 
 	--server start

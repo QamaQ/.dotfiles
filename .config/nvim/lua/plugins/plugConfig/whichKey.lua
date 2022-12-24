@@ -82,19 +82,21 @@ local mappings = {
 	e = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
 
 	f = {
-		name = 'Buscar',
+		name = "Buscar",
 		f = { "<CMD>Telescope find_files<CR>", "Buscar Archivos" },
-		t = { "<CMD>Telescope live_grep<CR>", "Buscar textos" }
+		t = { "<CMD>Telescope live_grep<CR>", "Buscar textos" },
 	},
 
-  l = {
-     name = 'LSP',
-    d = { "<CMD>TroubleToggle<CR>", "Diagnostic" },
-    f = { "<CMD> lua vim.lsp.buf.format({ async = true })<CR>", "Fomatear" }
-  }
-
+	l = {
+		name = "LSP",
+		d = { "<CMD>TroubleToggle<CR>", "Diagnostic" },
+		f = { "<CMD> lua vim.lsp.buf.format({ async = true })<CR>", "Fomatear" },
+	},
+    t = {
+        name = 'Open Terminal',
+        t = { "<CMD>ToggleTerm size=10 direction=horizontal<CR>", "Horizontal" }
+    }
 }
-
 
 which_key.setup(setup)
 which_key.register(mappings, opts)

@@ -1,4 +1,3 @@
-
 local status_line, lualine = pcall(require, "lualine")
 if not status_line then
 	return
@@ -25,7 +24,6 @@ local filename = {
 		unnamed = " ",
 		newfile = " ",
 	},
-    
 }
 
 local branch = {
@@ -53,8 +51,6 @@ local diagnostics = {
 	update_in_insert = true,
 }
 
-
-
 local filetype = {
 	"filetype",
 	fmt = function(str)
@@ -72,26 +68,49 @@ local filetype = {
 			"",
 			"nil",
 		}
-        if str == 'NvimTree' then
-            return ''
-        end
-        if str == 'TelescopePrompt' then
-            return ''
-        end
-        if str == "toggleterm" then
-            return ''
-        end
-        if str == "packer" then
-            return ''
-        end
-        if str == "Trouble" then
-            return ''
-        end
+		if str == "NvimTree" then
+			return ""
+		end
+		if str == "TelescopePrompt" then
+			return ""
+		end
+		if str == "toggleterm" then
+			return ""
+		end
+		if str == "packer" then
+			return ""
+		end
+		if str == "Trouble" then
+			return ""
+		end
 	end,
 	icons_enabled = false,
 	padding = 0,
 }
 
+local buffers = {
+	"buffers",
+    show_filename_only = false,
+	hide_filename_extension = true,
+    show_modified_status = true,
+	mode = 0,
+
+	max_length = vim.o.columns * 1 / 3,
+	filetype_name = {
+		TelescopePrompt = "",
+		packer = "",
+		dashboard = "Dashboard",
+		fzf = "FZF",
+		alpha = "Alpha",
+	}, -- Shows specific buffer name for that filetype ( { `filetype` = `buffer_name`, ... } )
+
+
+	symbols = {
+		modified = " ●", -- Text to show when the buffer is modified
+		alternate_file = ">", -- Text to show to identify the alternate file
+		directory = "", -- Text to show when the buffer is a directory
+	},
+}
 
 lualine.setup({
 	options = {
@@ -101,9 +120,9 @@ lualine.setup({
 		section_separators = { left = " ", right = " " },
 		disabled_filetypes = {
 			statusline = {
-                "alpha",
-                "dashboard"
-            },
+				"alpha",
+				"dashboard",
+			},
 			winbar = {},
 		},
 		ignore_focus = {},
@@ -118,18 +137,18 @@ lualine.setup({
 
 	sections = {
 		lualine_a = { mode },
-		lualine_b = { filename, diagnostics, filetype },
-		lualine_c = {  },
+		lualine_b = { buffers, diagnostics, filetype },
+		lualine_c = {},
 		lualine_x = {},
-		lualine_y = { },
+		lualine_y = {},
 		lualine_z = { branch, diff },
 	},
 	inactive_sections = {
 		lualine_a = { mode },
 		lualine_b = { filename, diagnostics, filetype },
-		lualine_c = {  },
+		lualine_c = {},
 		lualine_x = {},
-		lualine_y = {  },
+		lualine_y = {},
 		lualine_z = { branch, diff },
 	},
 	tabline = {},
@@ -137,4 +156,3 @@ lualine.setup({
 	inactive_winbar = {},
 	extensions = {},
 })
-

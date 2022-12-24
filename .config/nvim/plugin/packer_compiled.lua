@@ -119,6 +119,11 @@ _G.packer_plugins = {
     path = "/home/percy/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
+  ["codi.vim"] = {
+    loaded = true,
+    path = "/home/percy/.local/share/nvim/site/pack/packer/start/codi.vim",
+    url = "https://github.com/metakirby5/codi.vim"
+  },
   ["friendly-snippets"] = {
     loaded = true,
     path = "/home/percy/.local/share/nvim/site/pack/packer/start/friendly-snippets",
@@ -133,6 +138,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/percy/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
     url = "https://github.com/lukas-reineke/indent-blankline.nvim"
+  },
+  ["lsp-inlayhints.nvim"] = {
+    loaded = true,
+    path = "/home/percy/.local/share/nvim/site/pack/packer/start/lsp-inlayhints.nvim",
+    url = "https://github.com/lvimuser/lsp-inlayhints.nvim"
   },
   ["lualine.nvim"] = {
     loaded = true,
@@ -173,6 +183,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/percy/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
+  },
+  ["nvim-navic"] = {
+    loaded = true,
+    path = "/home/percy/.local/share/nvim/site/pack/packer/start/nvim-navic",
+    url = "https://github.com/SmiteshP/nvim-navic"
   },
   ["nvim-surround"] = {
     loaded = true,
@@ -238,6 +253,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/percy/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
+  },
+  ["toggleterm.nvim"] = {
+    loaded = true,
+    path = "/home/percy/.local/share/nvim/site/pack/packer/start/toggleterm.nvim",
+    url = "https://github.com/akinsho/toggleterm.nvim"
   },
   ["trouble.nvim"] = {
     loaded = true,

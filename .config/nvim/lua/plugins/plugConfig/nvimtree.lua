@@ -1,17 +1,15 @@
-local status_ok, nvimtree = pcall(require, 'nvim-tree')
+local status_ok, nvimtree = pcall(require, "nvim-tree")
 if not status_ok then
 	return
 end
 
-local icons = require('core.ui.icons')
+local icons = require("core.ui.icons")
 -- disable netrw at the very start of your init.lua (strongly advised)
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 -- set termguicolors to enable highlight groups
 vim.opt.termguicolors = true
-
-
 
 -- OR setup with some options
 nvimtree.setup({
@@ -51,7 +49,7 @@ nvimtree.setup({
 		debounce_delay = 50,
 		severity = {
 			min = vim.diagnostic.severity.HINT,
-			max = vim.diagnostic.severity.ERROR
+			max = vim.diagnostic.severity.ERROR,
 		},
 		icons = {
 			hint = icons.diagnostics.Hint,
@@ -60,5 +58,5 @@ nvimtree.setup({
 			error = icons.diagnostics.Error,
 		},
 	},
-	update_focused_file = { enable = true}
+	update_focused_file = { enable = true },
 })

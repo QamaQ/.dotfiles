@@ -1,6 +1,6 @@
 {
   	"Lua.telemetry.enable": false,
-  	"snippet.highlight": true,
+   	"snippet.highlight": true,
 	
   	"emmet.excludeLanguages": [],
 	"emmet.includeLanguages": {"vue-html": "html", "javascript": "javascriptreact"},

@@ -1,4 +1,3 @@
-
 local status_ok, trouble = pcall(require, "trouble")
 if not status_ok then
 	return
@@ -49,8 +48,7 @@ trouble.setup({
 		warning = icons.diagnostics.Warning,
 		hint = icons.diagnostics.Hint,
 		information = icons.diagnostics.Information,
-		other = "",
+		other = icons.misc.Squirrel,
 	},
 	use_diagnostic_signs = true, -- enabling this will use the signs defined in your lsp client
 })
-

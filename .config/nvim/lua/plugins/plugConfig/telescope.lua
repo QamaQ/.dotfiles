@@ -1,9 +1,9 @@
-local status_ok, telescope = pcall(require, 'telescope')
+local status_ok, telescope = pcall(require, "telescope")
 if not status_ok then
 	return
 end
 
-telescope.setup{
+telescope.setup({
 	defaults = {
 		--path_display = {"smart"},
 		file_ignore_patterns = {
@@ -62,12 +62,12 @@ telescope.setup{
 	},
 	pickers = {
 		find_files = {
-			theme = 'dropdown',
-			previewer = false
+			theme = "dropdown",
+			previewer = false,
 		},
 		live_grep = {
-			theme = 'dropdown'
-		}
+			theme = "dropdown",
+		},
 	},
 	extensions = {
 		media_files = {
@@ -77,4 +77,4 @@ telescope.setup{
 			find_cmd = "rg", -- find command (defaults to `fd`)
 		},
 	},
-}
+})

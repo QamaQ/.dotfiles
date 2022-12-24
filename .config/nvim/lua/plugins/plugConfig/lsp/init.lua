@@ -28,11 +28,10 @@ M.server_capabilities = function()
 	end)
 end
 
+require("plugins.plugConfig.lsp.mason")
+require("plugins.plugConfig.lsp.handlers").setup()
+require("plugins.plugConfig.lsp.null-ls")
 
-
-require('plugins.plugConfig.lsp.mason')
-require('plugins.plugConfig.lsp.handlers').setup()
-require('plugins.plugConfig.lsp.null-ls')
-require('plugins.plugConfig.lsp.troubleToggle')
+require("plugins.plugConfig.lsp.troubleToggle")
 
 return M
