@@ -1,38 +1,3 @@
-local o = vim.o
-local opt = vim.opt
-
---[[
-
-o.number = true
-opt.laststatus = 3
-o.cmdheight=0
-o.termguicolors=true
-o.mouse="a"
-opt.numberwidth=4
-opt.wrap=false
-
-opt.shiftwidth=4
-opt.tabstop=4
-opt.autoindent = true
-opt.expandtab = true
-opt.smartindent = true
-opt.title=true
-
-opt.cursorline=true
-o.clipboard = "unnamedplus"
-
-
-
-opt.backspace = "indent,eol,start"
-
-opt.backup = false
-
-opt.fillchars = opt.fillchars + "eob: "
-opt.fillchars:append({
-	stl = " ",
-})
-]]
-
 local options = {
 	backup = false, -- creates a backup file
 	clipboard = "unnamedplus", -- allows neovim to access the system clipboard
@@ -57,9 +22,9 @@ local options = {
 	updatetime = 100, -- faster completion (4000ms default)
 	writebackup = false, -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
 	expandtab = true, -- convert tabs to spaces
-	shiftwidth = 4, -- the number of spaces inserted for each indentation
-	tabstop = 4, -- insert 2 spaces for a tab
-	cursorline = true, -- highlight the current line
+	shiftwidth = 2, -- the number of spaces inserted for each indentation
+	tabstop = 2, -- insert 2 spaces for a tab
+	cursorline = false, -- highlight the current line
 	number = true, -- set numbered lines
 	laststatus = 3,
 	showcmd = false,
