@@ -1,8 +1,14 @@
-local gears = require("gears")
 local awful = require("awful")
+local gears = require("gears")
+local gfs = gears.filesystem
 local wibox = require("wibox")
+local beautiful = require("beautiful")
+local xresources = require("beautiful.xresources")
+local dpi = xresources.apply_dpi
+------------------------------------
 
-local taglist = function(s)
+local get_taglist = function(s)
+  -- Taglist buttons
   local taglist_buttons = gears.table.join(
     awful.button({}, 1, function(t)
       t:view_only()
@@ -26,16 +32,69 @@ local taglist = function(s)
     end)
   )
 
-  mytaglist = awful.widget.taglist({
+  ----------------------------------------------------------------------
+
+  -- local unfocus_icon = " "
+  local unfocus_icon = ""
+  local unfocus_color = "#EEFFFF"
+
+  local empty_icon = ""
+  local empty_color = "#545454"
+
+  -- local focus_icon = " "
+  local focus_icon = ""
+  local focus_color = "#89DDFF"
+
+  ----------------------------------------------------------------------
+
+  -- Function to update the tags
+  local update_tags = function(self, c3)
+    local tagicon = self:get_children_by_id("icon_role")[1]
+    if c3.selected then
+      tagicon.text = focus_icon
+      self.fg = focus_color
+    elseif #c3:clients() == 0 then
+      tagicon.text = empty_icon
+      self.fg = empty_color
+    elseif c3.urgent then
+      tagicon.text = empty_icon
+      self.fg = "#FF5370"
+    else
+      tagicon.text = unfocus_icon
+      self.fg = unfocus_color
+    end
+  end
+
+  ----------------------------------------------------------------------
+
+  local icon_taglist = awful.widget.taglist({
     screen = s,
     filter = awful.widget.taglist.filter.all,
-    layout = {
-      spacing = 1,
-      layout = wibox.layout.flex.horizontal,
+    layout = { spacing = 0, layout = wibox.layout.fixed.horizontal },
+    widget_template = {
+      {
+        { id = "icon_role", font = "JetBrainsMono Nerd Font 13", widget = wibox.widget.textbox },
+        id = "margin_role",
+        top = dpi(0),
+        bottom = dpi(0),
+        left = dpi(5),
+        right = dpi(5),
+        widget = wibox.container.margin,
+      },
+      id = "background_role",
+      widget = wibox.container.background,
+      create_callback = function(self, c3, index, objects)
+        update_tags(self, c3)
+      end,
+
+      update_callback = function(self, c3, index, objects)
+        update_tags(self, c3)
+      end,
     },
     buttons = taglist_buttons,
   })
-  return mytaglist
+  return icon_taglist
 end
 
-return taglist
+return get_taglist
+
