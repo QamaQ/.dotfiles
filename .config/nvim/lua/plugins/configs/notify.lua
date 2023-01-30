@@ -13,7 +13,9 @@ notify.setup{
   on_open = nil,
   on_close = nil,
   render = "default",
-  icons = nonicons_extention.icons
+  icons = nonicons_extention.icons,
+
+  background_colour = "#000000",
 }
 
 vim.notify = notify

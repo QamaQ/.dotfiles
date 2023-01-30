@@ -67,6 +67,6 @@ awful.rules.rules = {
   { rule = { class = "obsidian" }, properties = { titlebars_enabled = false } },
   { rule = { class = "xdg-desktop-portal-gnome" }, properties = { titlebars_enabled = false, floating = true } },
   { rule = { class = "mpv" }, properties = { floating = true } },
-  { rule = { class = "Nemo" }, properties = { floating = true } }
+  { rule = { class = "Nemo" }, properties = { floating = true, titlebars_enabled = false } }
 }
 -- }}}
