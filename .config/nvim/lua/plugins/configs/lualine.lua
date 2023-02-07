@@ -3,14 +3,6 @@ if not status_ok then
 	return
 end
 
-local status_nonicons, nonicons = pcall(require, "nvim-nonicons")
-if not status_nonicons then
-  return
-end
-local status_nicons_extention, nonicons_extension = pcall(require, "nvim-nonicons.extentions.lualine")
-if not status_nicons_extention then
-  return
-end
 
 local icons = require("core.ui.icons")
 
@@ -28,8 +20,8 @@ local diagnostics = {
 
 local branch = {
 	"branch",
-	-- icon = "",
-  icon = nonicons.get("git-branch")
+	icon = "",
+  -- icon = nonicons.get("git-branch")
 }
 
 local diff = {
@@ -62,7 +54,7 @@ lualine.setup({
 		},
 	},
 	sections = {
-		lualine_a = { nonicons_extension.mode },
+		lualine_a = { "mode" },
 		lualine_b = { diagnostics },
 		lualine_c = {  },
 		lualine_x = {  },

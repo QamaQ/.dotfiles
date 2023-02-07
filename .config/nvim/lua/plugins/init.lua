@@ -34,13 +34,13 @@ return packer.startup(function(use)
 
 	use("nvim-tree/nvim-tree.lua")
 	use("nvim-tree/nvim-web-devicons")
-	use("yamatsum/nvim-nonicons")
+	-- use("yamatsum/nvim-nonicons")
 	use("nvim-lualine/lualine.nvim")
 	use({ "akinsho/bufferline.nvim", tag = "v3.*" })
 	use("goolord/alpha-nvim")
 	use("lukas-reineke/indent-blankline.nvim")
 	use("yamatsum/nvim-cursorline")
-	use("rcarriga/nvim-notify")
+	-- use("rcarriga/nvim-notify")
 
 	-- cmp
 	use("hrsh7th/cmp-nvim-lsp")
