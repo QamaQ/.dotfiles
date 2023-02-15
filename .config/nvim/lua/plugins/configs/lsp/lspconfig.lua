@@ -4,7 +4,7 @@ if not status_ok then
 end
 
 
-local servers = { "sumneko_lua", "tsserver", "pyright", "html", "cssls" }
+local servers = { "lua_ls", "tsserver", "pyright", "html", "cssls" }
 
 local handlers = require("plugins.configs.lsp.handlers")
 
