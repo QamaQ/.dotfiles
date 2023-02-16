@@ -62,8 +62,8 @@ return packer.startup(function(use)
 	use("rafamadriz/friendly-snippets")
 
 	-- colorschemes
-	-- use("marko-cerovac/material.nvim")
-	use("QamaQ/material.nvim")
+	use("marko-cerovac/material.nvim")
+	-- use("QamaQ/material.nvim")
 	use("lunarvim/Onedarker.nvim")
 	use("folke/tokyonight.nvim")
 

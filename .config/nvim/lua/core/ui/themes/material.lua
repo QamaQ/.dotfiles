@@ -1,9 +1,19 @@
+local M = {}
+
 local status_material, material = pcall(require, "material")
 if not status_material then
 	return
 end
 
 vim.g.material_style = "darker"
+
+
+local status_color, colors = pcall(require, "material.colors")
+if not status_color then
+	return
+end
+
+
 material.setup({
 
 	contrast = {
@@ -66,18 +76,23 @@ material.setup({
 
 	async_loading = true, -- Load parts of the theme asyncronously for faster startup (turned on by default)
 
-	custom_colors = nil, -- If you want to everride the default colors, set this to a function
+	custom_colors = function(colors)
+    -- colors.editor.fg = "#EEFFFF"
+  end, -- If you want to everride the default colors, set this to a function
 
-	custom_highlights = {}, -- Overwrite highlights with your own
+	custom_highlights = {
+    
+  }, -- Overwrite highlights with your own
 })
+
+
+
 vim.cmd("colorscheme material")
 
-local M = {}
 
-local status_color, colors = pcall(require, "material.colors")
-if not status_color then
-	return
-end
+
+
+
 local m = colors.main
 local e = colors.editor
 local g = colors.git
@@ -119,5 +134,9 @@ if not status_ok then
 end
 
 lualine.setup({ options = { theme = M.material_lualine } })
+
+
+
+
 
 return M
