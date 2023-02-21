@@ -46,7 +46,7 @@ def workspaces():
             borderwidth=1,
             active=colors['active'],
             inactive=colors['inactive'],
-            rounded=False,
+            rounded=True,
             highlight_method='text',
             urgent_alert_method='text',
             urgent_border=colors['urgent'],
@@ -84,7 +84,8 @@ primary_widgets = [
     powerline('dark', 'dark'),
 
     icon(fg="color4", text=' '), # Icon: nf-fa-download
-    
+
+
     widget.CheckUpdates(
         background=colors['dark'],
         colour_have_updates=colors['color4'],
