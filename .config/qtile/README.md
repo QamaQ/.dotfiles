@@ -22,7 +22,7 @@ Clone this repository and copy my configs:
 git clone https://github.com/antoniosarosi/dotfiles.git
 cp -r dotfiles/.config/qtile ~/.config
 ```
-
+rm -iv ~/.config/volumeicon/volumeicon
 Test it with **[Xephyr](https://wiki.archlinux.org/index.php/Xephyr)**:
 
 ```bash

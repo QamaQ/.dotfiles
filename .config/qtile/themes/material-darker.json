@@ -8,8 +8,8 @@
         "#353c4a"
     ],
     "light": [
-        "#f1ffff",
-        "#f1ffff"
+        "#EEffff",
+        "#EEffff"
     ],
     "text": [
         "#0f101a",
@@ -20,8 +20,8 @@
         "#a151d3"
     ],
     "active": [
-        "#f1ffff",
-        "#f1ffff"
+        "#EEffff",
+        "#EEffff"
     ],
     "inactive": [
         "#4c566a",

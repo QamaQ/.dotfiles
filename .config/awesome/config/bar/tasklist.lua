@@ -38,7 +38,6 @@ local get_tasklist = function(s)
     -- not a widget instance.
     widget_template = {
       {
-
         {
           {
             {

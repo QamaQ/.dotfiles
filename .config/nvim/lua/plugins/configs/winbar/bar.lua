@@ -28,6 +28,11 @@ M.winbar_filetype_exclude = {
 	"",
 }
 
+local status_ok_devicons, nvim_web_devicons = pcall(require, "nvim-web-devicons")
+if not status_ok then
+	return
+end
+
 M.get_filename = function()
 	local filename = vim.fn.expand("%:t")
 	local extension = vim.fn.expand("%:e")
@@ -35,7 +40,7 @@ M.get_filename = function()
 
 	if not f.isempty(filename) then
 		local file_icon, file_icon_color =
-			require("nvim-web-devicons").get_icon_color(filename, extension, { default = true })
+			nvim_web_devicons.get_icon_color(filename, extension, { default = true })
 
 		local hl_group = "FileIconColor" .. extension
 

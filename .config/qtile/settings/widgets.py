@@ -37,7 +37,7 @@ def workspaces():
         separator(),
         widget.GroupBox(
             **base(fg='light'),
-            font='UbuntuMono Nerd Font',
+            font='JetBrainsMono Nerd Font',
             fontsize=19,
             margin_y=3,
             margin_x=0,
@@ -47,8 +47,8 @@ def workspaces():
             active=colors['active'],
             inactive=colors['inactive'],
             rounded=False,
-            highlight_method='block',
-            urgent_alert_method='block',
+            highlight_method='text',
+            urgent_alert_method='text',
             urgent_border=colors['urgent'],
             this_current_screen_border=colors['focus'],
             this_screen_border=colors['grey'],
@@ -61,45 +61,59 @@ def workspaces():
         separator(),
     ]
 
+def wallpaper():
+    return widget.Wallpaper(
+        background = colors['dark'],
+        directory = '~/.dotfiles/.wall/',
+        fmt = '',
+        padding = 5,
+        random_selection = True,
+
+    )
+
 
 primary_widgets = [
+    wallpaper(),
+
+    separator(),
+
     *workspaces(),
 
     separator(),
 
-    powerline('color4', 'dark'),
+    powerline('dark', 'dark'),
 
-    icon(bg="color4", text=' '), # Icon: nf-fa-download
+    icon(fg="color4", text=' '), # Icon: nf-fa-download
     
     widget.CheckUpdates(
-        background=colors['color4'],
-        colour_have_updates=colors['text'],
-        colour_no_updates=colors['text'],
+        background=colors['dark'],
+        colour_have_updates=colors['color4'],
+        colour_no_updates=colors['color4'],
         no_update_string='0',
         display_format='{updates}',
         update_interval=1800,
         custom_command='checkupdates',
     ),
 
-    powerline('color3', 'color4'),
+    powerline('dark', 'dark'),
 
-    icon(bg="color3", text=' '),  # Icon: nf-fa-feed
+    icon(bg="dark",fg="color3", text=' '),  # Icon: nf-fa-feed
     
-    widget.Net(**base(bg='color3'), interface='wlp3s0'),
+    widget.Net(**base(bg='dark', fg='color3'), interface='wlp3s0'),
 
-    powerline('color2', 'color3'),
+    powerline('dark', 'dark'),
 
-    widget.CurrentLayoutIcon(**base(bg='color2'), scale=0.65),
+    widget.CurrentLayoutIcon(**base(bg='dark', fg='color2'), scale=0.65),
 
-    widget.CurrentLayout(**base(bg='color2'), padding=5),
+    widget.CurrentLayout(**base(bg='dark', fg='color2'), padding=5),
 
-    powerline('color1', 'color2'),
+    powerline('dark', 'dark'),
 
-    icon(bg="color1", fontsize=17, text=' '), # Icon: nf-mdi-calendar_clock
+    icon(bg="dark", fg='color1', fontsize=17, text=' '), # Icon: nf-mdi-calendar_clock
 
-    widget.Clock(**base(bg='color1'), format='%d/%m/%Y - %H:%M '),
+    widget.Clock(**base(bg='dark', fg='color1'), format='%d/%m/%Y - %H:%M '),
 
-    powerline('dark', 'color1'),
+    powerline('dark', 'dark'),
 
     widget.Systray(background=colors['dark'], padding=5),
 ]
@@ -123,7 +137,7 @@ secondary_widgets = [
 ]
 
 widget_defaults = {
-    'font': 'UbuntuMono Nerd Font Bold',
+    'font': 'JetBrainsMono Nerd Font Bold',
     'fontsize': 14,
     'padding': 1,
 }

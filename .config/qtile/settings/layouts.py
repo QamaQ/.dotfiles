@@ -16,7 +16,7 @@ layout_conf = {
 }
 
 layouts = [
-    layout.Max(),
+    # layout.Max(),
     layout.MonadTall(**layout_conf),
     layout.MonadWide(**layout_conf),
     layout.Bsp(**layout_conf),
@@ -38,6 +38,8 @@ floating_layout = layout.Floating(
         Match(wm_class='ssh-askpass'),
         Match(title='branchdialog'),
         Match(title='pinentry'),
+
+        Match(wm_class='org.gnome.Nautilus')
     ],
     border_focus=colors["color4"][0]
 )

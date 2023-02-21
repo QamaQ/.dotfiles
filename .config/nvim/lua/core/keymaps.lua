@@ -36,3 +36,5 @@ keymap("n", "<A-Up>", ":m -2<CR>", opts)
 keymap("n", "<A-Down>", ":m +1<CR>", opts)
 
 
+
+keymap("n", "<leader>f", ":Telescope<CR>", opts)

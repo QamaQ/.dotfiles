@@ -12,4 +12,6 @@ require("plugins.configs.alpha")
 require("plugins.configs.indent-blankline")
 require("plugins.configs.gitsigns")
 require("plugins.configs.cursorline")
-require("plugins.configs.notify")
+
+-- require("plugins.configs.whick-key")
+require("plugins.configs.telescope")

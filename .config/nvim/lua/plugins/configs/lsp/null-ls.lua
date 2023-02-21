@@ -23,7 +23,7 @@ null_ls.setup({
 		formatting.google_java_format,
 		-- diagnostics.flake8,
 		diagnostics.shellcheck,
-		require("typescript.extensions.null-ls.code-actions"),
+		-- require("typescript.extensions.null-ls.code-actions"),
 		null_ls.builtins.code_actions.gitsigns,
 	},
 })

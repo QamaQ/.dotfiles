@@ -1,142 +1,145 @@
 local M = {}
 
-local keymap = vim.keymap
-local diagnostic = vim.diagnostic
-local api = vim.api
-local lsp = vim.lsp
-local fn = vim.fn
+M.capabilities = vim.lsp.protocol.make_client_capabilities()
 
 local status_cmp_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if not status_cmp_ok then
-	return
+  return
 end
-
-M.capabilities = lsp.protocol.make_client_capabilities()
 M.capabilities.textDocument.completion.completionItem.snippetSupport = true
-M.capabilities = cmp_nvim_lsp.default_capabilities()
+M.capabilities = cmp_nvim_lsp.default_capabilities(M.capabilities)
 
 M.setup = function()
-	local icons = require("core.ui.icons")
+  local icons = require "core.ui.icons"
+  local signs = {
 
-	local config = {
-		virtual_text = false,
-		signs = true,
-		underline = true,
-		update_in_insert = true,
-		severity_sort = true,
-	}
+    { name = "DiagnosticSignError", text = icons.diagnosticSign.Error },
+    { name = "DiagnosticSignWarn",  text = icons.diagnosticSign.Warning },
+    { name = "DiagnosticSignHint",  text = icons.diagnosticSign.Hint },
+    { name = "DiagnosticSignInfo",  text = icons.diagnosticSign.Information },
+  }
 
-	diagnostic.config(config)
+  for _, sign in ipairs(signs) do
+    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+  end
 
-	local signs = {
-		Error = icons.diagnosticSign.Error,
-		Warn = icons.diagnosticSign.Warning,
-		Hint = icons.diagnosticSign.Hint,
-		Info = icons.diagnosticSign.Information,
-	}
-	for type, icon in pairs(signs) do
-		local hl = "DiagnosticSign" .. type
-		fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-	end
+  local config = {
+    -- disable virtual text
+    virtual_lines = false,
+    virtual_text = true,
+    -- virtual_text = {
+    --   -- spacing = 7,
+    --   -- update_in_insert = false,
+    --   -- severity_sort = true,
+    --   -- prefix = "<-",
+    --   prefix = " ●",
+    --   source = "if_many", -- Or "always"
+    --   -- format = function(diag)
+    --   --   return diag.message .. "blah"
+    --   -- end,
+    -- },
 
-	lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, { border = "rounded" })
+    -- show signs
+    signs = {
+      active = signs,
+    },
+    update_in_insert = true,
+    underline = true,
+    severity_sort = true,
+    float = {
+      focusable = true,
+      style = "minimal",
+      border = "rounded",
+      -- border = {"▄","▄","▄","█","▀","▀","▀","█"},
+      source = "if_many", -- Or "always"
+      header = "",
+      prefix = "",
+      -- width = 40,
+    },
+  }
 
-	lsp.handlers["textDocument/signatureHelp"] = lsp.with(lsp.handlers.signature_help, { border = "rounded" })
+  vim.diagnostic.config(config)
 
-	vim.cmd([[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor"})]])
+  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+    border = "rounded",
+    -- width = 60,
+    -- height = 30,
+  })
+
+  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+    border = "rounded",
+    -- width = 60,
+    -- height = 30,
+  })
 end
+
 
 local function attach_navic(client, bufnr)
-	vim.g.navic_silence = true
-	local status_ok, navic = pcall(require, "nvim-navic")
-	if not status_ok then
-		return
-	end
-	navic.attach(client, bufnr)
-end
-
--- Mappings.
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
-local opts = { noremap = true, silent = true }
-keymap.set("n", "<space>e", diagnostic.open_float, opts)
-keymap.set("n", "[d", diagnostic.goto_prev, opts)
-keymap.set("n", "]d", diagnostic.goto_next, opts)
-keymap.set("n", "<space>q", diagnostic.setloclist, opts)
-
-local util = require("vim.lsp.util")
-
-local formatting_callback = function(client, bufnr)
-	keymap.set("n", "<leader>f", function()
-		local params = util.make_formatting_params({})
-		client.request("textDocument/formatting", params, nil, bufnr)
-	end, { buffer = bufnr })
+  vim.g.navic_silence = true
+  local status_ok, navic = pcall(require, "nvim-navic")
+  if not status_ok then
+    return
+  end
+  navic.attach(client, bufnr)
 end
 
 local function lsp_keymaps(bufnr)
-	-- Enable completion triggered by <c-x><c-o>
-	api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-
-	-- Mappings.
-	-- See `:help vim.lsp.*` for documentation on any of the below functions
-	local bufopts = { noremap = true, silent = true, buffer = bufnr }
-	keymap.set("n", "gD", lsp.buf.declaration, bufopts)
-	keymap.set("n", "gd", lsp.buf.definition, bufopts)
-	keymap.set("n", "K", lsp.buf.hover, bufopts)
-	keymap.set("n", "gi", lsp.buf.implementation, bufopts)
-	keymap.set("n", "<C-k>", lsp.buf.signature_help, bufopts)
-	keymap.set("n", "<space>wa", lsp.buf.add_workspace_folder, bufopts)
-	keymap.set("n", "<space>wr", lsp.buf.remove_workspace_folder, bufopts)
-	keymap.set("n", "<space>wl", function()
-		print(vim.inspect(lsp.buf.list_workspace_folders()))
-	end, bufopts)
-	keymap.set("n", "<space>D", lsp.buf.type_definition, bufopts)
-	keymap.set("n", "<space>rn", lsp.buf.rename, bufopts)
-	keymap.set("n", "<space>ca", lsp.buf.code_action, bufopts)
-	keymap.set("n", "gr", lsp.buf.references, bufopts)
-	keymap.set("n", "<space>f", function()
-		lsp.buf.format({ async = true })
-	end, bufopts)
+  local opts = { noremap = true, silent = true }
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", "<cmd>Telescope lsp_declarations<CR>", opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "gI", "<cmd>Telescope lsp_implementations<CR>", opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<cmd>Telescope lsp_references<CR>", opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+  vim.cmd [[ command! Format execute 'lua vim.lsp.buf.format({ async = true })' ]]
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<M-f>", "<cmd>Format<cr>", opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<M-a>", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<M-s>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>f", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
 end
 
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
 M.on_attach = function(client, bufnr)
-	lsp_keymaps(bufnr)
-	formatting_callback(client, bufnr)
-	attach_navic(client, bufnr)
-end
+  lsp_keymaps(bufnr)
+  attach_navic(client, bufnr)
 
-M.lsp_flags = { debounce_text_changes = 150 }
+
+end
 
 function M.enable_format_on_save()
-	vim.cmd([[
+  vim.cmd [[
     augroup format_on_save
-      autocmd! 
-      autocmd BufWritePre * lua vim.lsp.buf.format({ async = false }) 
+      autocmd!
+      autocmd BufWritePre * lua vim.lsp.buf.format({ async = false })
     augroup end
-  ]])
-	vim.notify("Enabled format on save")
+  ]]
+  vim.notify "Enabled format on save"
 end
 
 function M.disable_format_on_save()
-	M.remove_augroup("format_on_save")
-	vim.notify("Disabled format on save")
+  M.remove_augroup "format_on_save"
+  vim.notify "Disabled format on save"
 end
 
 function M.toggle_format_on_save()
-	if fn.exists("#format_on_save#BufWritePre") == 0 then
-		M.enable_format_on_save()
-	else
-		M.disable_format_on_save()
-	end
+  if vim.fn.exists "#format_on_save#BufWritePre" == 0 then
+    M.enable_format_on_save()
+  else
+    M.disable_format_on_save()
+  end
 end
 
 function M.remove_augroup(name)
-	if fn.exists("#" .. name) == 1 then
-		vim.cmd("au! " .. name)
-	end
+  if vim.fn.exists("#" .. name) == 1 then
+    vim.cmd("au! " .. name)
+  end
 end
 
-vim.cmd([[ command! LspToggleAutoFormat execute 'lua require("plugins.configs.lsp.handlers").toggle_format_on_save()' ]])
+vim.cmd [[ command! LspToggleAutoFormat execute 'lua require("plugins.configs.lsp.handlers").toggle_format_on_save()' ]]
 
 return M

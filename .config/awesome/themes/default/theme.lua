@@ -105,7 +105,7 @@ theme.titlebar_maximized_button_normal_active = gears.color.recolor_image(themes
 theme.titlebar_maximized_button_focus_active = gears.color.recolor_image(themes_path .. "icons/titlebar/circule.svg", colors.gree)
 
 -- theme.wallpaper = themes_path.."default/background.jpg"
-theme.wallpaper = "~/Documentos/.dotfiles/.wall/004.jpg"
+theme.wallpaper = "~/.dotfiles/.wall/008.jpg"
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = themes_path.."default/layouts/fairhw.png"
