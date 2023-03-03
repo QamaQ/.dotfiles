@@ -15,6 +15,13 @@ alias cat='bat --style=plain --paging=never'
 alias ls='exa --group-directories-first'
 alias tree='exa -T'
 # alias dotfiles="git --git-dir $HOME/.dotfiles/ --work-tree $HOME"
+alias install='yay -S'
+alias update='yay -Syy'
+alias upgrade='yay'
+alias search='yay -Ss'
+alias clone='git clone'
+
+
 
 # Colors
 

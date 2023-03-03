@@ -11,8 +11,8 @@ local handlers = require("plugins.configs.lsp.handlers")
 for _, lsp in ipairs(servers) do
 	lspconfig[lsp].setup{
 		on_attach = handlers.on_attach,
-		flags = handlers.lsp_flags,
 		capabilities = handlers.capabilities,
+	  handlers = handlers.handlers
 	}
 end
 

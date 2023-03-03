@@ -51,8 +51,8 @@ return packer.startup(function(use)
   use("saadparwaiz1/cmp_luasnip")
 
   -- lsp
-  use "williamboman/mason.nvim"
-  use "williamboman/mason-lspconfig.nvim"
+  -- use "williamboman/mason.nvim"
+  -- use "williamboman/mason-lspconfig.nvim"
   use "folke/neodev.nvim"
   use("neovim/nvim-lspconfig")
   use("jose-elias-alvarez/null-ls.nvim")

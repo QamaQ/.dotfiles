@@ -91,6 +91,10 @@ keys = [Key(key[0], key[1], *key[2:]) for key in [
     # Brightness
     ([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set +10%")),
     ([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 10%-")),
+
+    # Playerctl
+    ([], "Print", lazy.spawn("flameshot gui")),
+    (["shift"], "Print", lazy.spawn("flameshot launcher")),
 ]]
 
 

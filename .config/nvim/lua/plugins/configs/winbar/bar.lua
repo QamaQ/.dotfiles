@@ -29,7 +29,7 @@ M.winbar_filetype_exclude = {
 }
 
 local status_ok_devicons, nvim_web_devicons = pcall(require, "nvim-web-devicons")
-if not status_ok then
+if not status_ok_devicons then
 	return
 end
 
