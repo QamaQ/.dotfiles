@@ -1,0 +1,80 @@
+
+*{
+    border: none;
+    border-radius: 0;
+    font-weight: bold;
+    border: none;
+    border-radius: 0;
+    font-family: JetBrainsMono Nerd Font,Roboto, Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: #212121;
+    color: #EEFFFF;
+}
+
+tooltip {
+  background: #212121;
+  border: 1px solid rgba(100, 114, 125, 0.5);
+}
+tooltip label {
+  color: #EEFFFF;
+}
+
+#workspaces button {
+    padding: 0 5px;
+    background: transparent;
+    color: #545454;
+    border-bottom: 3px solid transparent;
+}
+
+#workspaces button.active {
+    color: #80CBC4;
+}
+#workspaces button.inactive{
+    color: #EEFFFF;
+}
+#workspaces button.focused {
+    color: #EEFFFF;
+}
+
+
+/* BATTERY */
+#battery{
+    color: #82AAFF;
+}
+#battery.warning{
+    color: #FFCB6B;
+}
+#battery.critical{
+    color: #FF5370;
+}
+
+
+/* CLOCK */
+#clock{
+    color: #C3E88D;
+}
+
+
+/* wireplumber */
+#pulseaudio{
+    color: #C792EA;
+}
+
+
+#cpu,
+#memory{
+    color: #89DDFF;
+}
+#network{
+    color: #FFCB6B;
+}
+
+
+#custom-pacman{
+    color: #FFCC00;
+}
+
