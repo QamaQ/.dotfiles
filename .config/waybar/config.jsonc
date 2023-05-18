@@ -1,69 +1,78 @@
 {
-    "layer": "top", // Waybar at top layer
-    "position": "top", // Waybar position (top|bottom|left|right)
-    "height": 0, // Waybar height (to be removed for auto height)
+    "layer": "top",
+    "position": "top",
+    "mod": "dock",
     "exclusive": true,
     "passtrough": true,
-    "gtk-layer-shell": true,
-    // "width": 1280, // Waybar width
-    "spacing": 10, // Gaps between modules (4px)
-    // Choose the order of the modules
-    "modules-left": [ "cpu", "memory", "temperature" ],
-    "modules-center": [ "wlr/workspaces" ],
-    "modules-right": [ "custom/pacman", "battery", "pulseaudio", "network", "clock", "tray" ],
-
+    "height": 0,
+    "modules-left": [
+        "wlr/workspaces"
+    ],
+    "modules-center": [
+        "hyprland/window"
+    ],
+    "modules-right": [
+        "tray",
+        "custom/updates",
+        "pulseaudio",
+        "pulseaudio#microphone",
+        "clock"
+    ],
+    "hyprland/window": {
+        "format": "{}"
+    },
     "wlr/workspaces": {
-        "format": "{icon}",
-        "on-click": "activate",
-        "all-outputs": true,
-        "active-only": false,
         "on-scroll-up": "hyprctl dispatch workspace e+1",
         "on-scroll-down": "hyprctl dispatch workspace e-1",
+        "all-outputs": true,
+        "on-click": "activate",
+        "format": "{icon}",
         "format-icons": {
-            "1": "󰧞",
-            "2": "󰧞",
-            "3": "󰧞",
-            "4": "󰧞",
-            "5": "󰧞",
-            "6": "󰧞",
-            "urgent": "󰧞",
-            "active": "󰧞",
-            "default": "󰧞"
+            "1": "",
+            "2": "",
+            "3": "",
+            "4": "",
+            "5": "",
+            "6": "",
+            "urgent": "",
+            "active": "",
+            "default": ""
         }
     },
-    "battery": {
-        "bat": "BAT0",
-        "interval": 60,
-        "states": {
-            "warning": 30,
-            "critical": 15
-        },
-        "format": "{capacity}% {icon}",
-        "format-icons": [" ", " ", " ", " ", " "],
-        "max-length": 25
+    "custom/updates": {
+        "exec": "(yay -Qua) | wc -l",
+        "interval": 7200,
+        "format": " {}"
+    },
+    "tray": {
+        "icon-size": 13,
+        "tooltip": false,
+        "spacing": 10,
     },
     "clock": {
-        "format": "{:%H:%M}  ",
-        "format-alt": "{:%A, %B %d, %Y}  ",
-        "interval": 60
-    }, 
-
+        "format": "{: %R   %d/%m}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
     "pulseaudio": {
-        "format": "{volume}% {icon}",
+        "format": "{icon} {volume}%",
         "tooltip": false,
-        "format-muted": "󰝟 ",
+        "format-muted": " Muted",
         "on-click": "pamixer -t",
         "on-scroll-up": "pamixer -i 5",
         "on-scroll-down": "pamixer -d 5",
         "scroll-step": 5,
         "format-icons": {
-            "headphone": " ",
-            "hands-free": " ",
-            "headset": " ",
-            "phone": " ",
-            "portable": " ",
-            "car": " ",
-            "default": [" ", " ", " "]
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": [
+                "",
+                "",
+                ""
+            ]
         }
     },
     "pulseaudio#microphone": {
@@ -75,57 +84,5 @@
         "on-scroll-up": "pamixer --default-source -i 5",
         "on-scroll-down": "pamixer --default-source -d 5",
         "scroll-step": 5
-    },
-
-    "cpu": {
-        "interval": 10,
-        "format": "{}% 󰍛 ",
-        "max-length": 10
-    },
-    "memory": {
-        "interval": 30,
-        "format": "{used:0.1f}G/{total:0.1f}G  "
-    },
-
-    "network": {
-        "interface": "wlp3s0",
-        "format": "{ifname}",
-        "format-wifi": "{essid} ({signalStrength}%)  ",
-        "format-ethernet": "{ipaddr}/{cidr}  ",
-        "format-disconnected": "", //An empty format will hide the module.
-        "tooltip-format": "{ifname} via {gwaddr}  ",
-        "tooltip-format-wifi": "{essid} ({signalStrength}%)  ",
-        "tooltip-format-ethernet": "{ifname}  ",
-        "tooltip-format-disconnected": "Disconnected",
-        "max-length": 50
-    },
-
-    "temperature": {
-        "thermal-zone": "/sys/class/thermal/",
-        "critical-threshold": 70,
-        "interval": 5,
-        "format": "{temperatureC}°C {icon}",
-        "format-icons": [
-            " ", // Icon: temperature-empty
-            " ", // Icon: temperature-quarter
-            " ", // Icon: temperature-half
-            " ", // Icon: temperature-three-quarters
-            " "  // Icon: temperature-full
-        ],
-        "tooltip": true
-    },
-
-    "custom/pacman": {
-        "format": "{} 󰄠 ",
-        "interval": 3600,                     // every hour
-        "exec": "/usr/bin/yay -Qu | wc -l",       // # of updates
-        "exec-if": "exit 0",                  // always run; consider advanced run conditions
-        "on-click": "kitty -e 'yay -Syu'; pkill -SIGRTMIN+8 waybar", // update system
-        "signal": 8
-    },
-
-    "tray": {
-        "icon-size": 15,
-        "spacing": 10
     }
 }

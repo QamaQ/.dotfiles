@@ -1,0 +1,25 @@
+colors:
+  primary:
+    background: '#212121'
+    foreground: '#EEFFFF'
+
+  normal:
+    black:    '#000000'
+    red:      '#FF5370'
+    green:    '#C3E88D'
+    yellow:   '#FFCB6B'
+    blue:     '#82AAFF'
+    magenta:  '#C792EA'
+    cyan:     '#89DDFF'
+    white:    '#FFFFFF'
+
+  bright:
+    black:    '#545454'
+    red:      '#FF5370'
+    green:    '#C3E88D'
+    yellow:   '#FFCB6B'
+    blue:     '#82AAFF'
+    magenta:  '#C792EA'
+    cyan:     '#89DDFF'
+    white:    '#FFFFFF'
+

@@ -3,7 +3,8 @@ from .theme import colors
 
 # Get the icons at https://www.nerdfonts.com/cheat-sheet (you need a Nerd Font)
 
-def base(fg='text', bg='dark'): 
+
+def base(fg='text', bg='dark'):
     return {
         'foreground': colors[fg],
         'background': colors[bg]
@@ -26,13 +27,13 @@ def icon(fg='text', bg='dark', fontsize=16, text="?"):
 def powerline(fg="light", bg="dark"):
     return widget.TextBox(
         **base(fg, bg),
-        text="", # Icon: nf-oct-triangle_left
+        text="",  # Icon: nf-oct-triangle_left
         fontsize=37,
         padding=-2
     )
 
 
-def workspaces(): 
+def workspaces():
     return [
         separator(),
         widget.GroupBox(
@@ -61,13 +62,14 @@ def workspaces():
         separator(),
     ]
 
+
 def wallpaper():
     return widget.Wallpaper(
-        background = colors['dark'],
-        directory = '~/.dotfiles/.wall/',
-        fmt = '',
-        padding = 5,
-        random_selection = True,
+        background=colors['dark'],
+        directory='~/.dotfiles/.wall/',
+        fmt='',
+        padding=5,
+        random_selection=True,
 
     )
 
@@ -83,7 +85,7 @@ primary_widgets = [
 
     powerline('dark', 'dark'),
 
-    icon(fg="color4", text=' '), # Icon: nf-fa-download
+    icon(fg="color4", text=' '),  # Icon: nf-fa-download
 
 
     widget.CheckUpdates(
@@ -98,9 +100,9 @@ primary_widgets = [
 
     powerline('dark', 'dark'),
 
-    icon(bg="dark",fg="color3", text=' '),  # Icon: nf-fa-feed
-    
-    widget.Net(**base(bg='dark', fg='color3'), interface='wlp3s0'),
+    icon(bg="dark", fg="color3", text=' '),  # Icon: nf-fa-feed
+
+    widget.Net(**base(bg='dark', fg='color3'), interface='wlan0'),
 
     powerline('dark', 'dark'),
 
@@ -110,7 +112,8 @@ primary_widgets = [
 
     powerline('dark', 'dark'),
 
-    icon(bg="dark", fg='color1', fontsize=17, text=' '), # Icon: nf-mdi-calendar_clock
+    # Icon: nf-mdi-calendar_clock
+    icon(bg="dark", fg='color1', fontsize=17, text=' '),
 
     widget.Clock(**base(bg='dark', fg='color1'), format='%d/%m/%Y - %H:%M '),
 

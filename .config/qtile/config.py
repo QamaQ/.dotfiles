@@ -1,6 +1,4 @@
-
 from libqtile import hook
-
 from settings.keys import mod, keys
 from settings.groups import groups
 from settings.layouts import layouts, floating_layout
@@ -13,10 +11,11 @@ from os import path
 import subprocess
 
 
+
 # @hook.subscribe.startup_once
 # def autostart():
 #     subprocess.call([path.join(qtile_path, 'autostart.sh')])
-
+#
 
 def is_running(process):
     """check if a process is already running (used in run_once).
@@ -46,23 +45,23 @@ def execute(process):
 def startup_once():
     """Start the applications at Qtile startup."""
     # detect_screens(qtile)
-    execute("nm-applet"),
-    execute("volumeicon"),
+    # execute("nm-applet"),
+    # execute("volumeicon"),
     execute("picom"),
-    execute("cbatticon -u 2"),
+    # execute("cbatticon -u 2"),
     execute("/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1")
 
 
 @hook.subscribe.startup_complete
 def startup_complete(qtile=None):
-    #loop = asyncio.get_event_loop()
-    #logger.info("Startup complete: qtile:%s, loop:%s", qtile, loop)
+    # loop = asyncio.get_event_loop()
+    # logger.info("Startup complete: qtile:%s, loop:%s", qtile, loop)
     # here the loop is not yet started
-    #loop.call_later(5, auto_wallpaper, loop)
+    # loop.call_later(5, auto_wallpaper, loop)
 
     # old thread method:
-    #from threading import Thread
-    #Thread(target=auto_wallpaper).start()
+    # from threading import Thread
+    # Thread(target=auto_wallpaper).start()
     pass
 
 

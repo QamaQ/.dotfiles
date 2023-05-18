@@ -1,0 +1,6 @@
+-- icons whitesur
+./install -d ~/.local/share/icons -t default -a -b --black
+
+
+-- gtk theme whitesur
+./install -d ~/.local/share/themes -o normal -c dark -t blue -p default -s default -i arch -b ~/Imágenes/dir -m -N normal -l -HD --normal --rounded -darker --dialog

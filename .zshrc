@@ -20,8 +20,8 @@ alias update='yay -Syy'
 alias upgrade='yay'
 alias search='yay -Ss'
 alias clone='git clone'
-
-
+alias clc='clear'
+alias tmx='tmux attach | tmux'
 
 # Colors
 
