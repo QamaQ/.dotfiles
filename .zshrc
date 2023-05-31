@@ -42,3 +42,17 @@ autosuggestions=/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.z
 syntax=/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 [[ -f $autosuggestions ]] && source $autosuggestions
 [[ -f $syntax ]] && source $syntax
+
+
+
+lg()
+{
+    export LAZYGIT_NEW_DIR_FILE=~/.lazygit/newdir
+
+    lazygit "$@"
+
+    if [ -f $LAZYGIT_NEW_DIR_FILE ]; then
+            cd "$(cat $LAZYGIT_NEW_DIR_FILE)"
+            rm -f $LAZYGIT_NEW_DIR_FILE > /dev/null
+    fi
+}

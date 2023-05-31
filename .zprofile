@@ -11,5 +11,4 @@ export RANGER_LOAD_DEFAULT_RC=false
 
 export XDG_RUNTIME_DIR=/run/user/$UID
 
-XDG_RUNTIME_DIR=/run/user/$UID
-
+export TERM=screen-256color
