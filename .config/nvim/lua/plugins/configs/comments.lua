@@ -1,6 +1,8 @@
-local status_ok, commets = pcall(require, 'Comment')
-if not status_ok then
-	return
-end
-
-commets.setup()
+return {
+    "numToStr/Comment.nvim",
+    event = { "VeryLazy" },
+    config = function()
+        local comments = require("Comment")
+        comments.setup()
+    end,
+}
