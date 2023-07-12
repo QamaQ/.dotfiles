@@ -4,9 +4,6 @@ add_newline = false
 [line_break]
 disabled = false
 
-[directory]
-style = "bold blue"
-
 
 [character]
 success_symbol = '[](bold green)'
@@ -25,20 +22,46 @@ map_symbol = true
 symbol = ''
 success_symbol = ''
 
+#[custom.shell]
+#command = "echo $STARSHIP_SHELL"  # shows output of command
+#when = """ test "$STARSHIP_SHELL" != "fish" """
+#style = "dimmed blue"
+#format = "[$output]($style)"
+#shell =["bash"]
+
+[username]
+style_user = 'red bold'
+style_root = 'yellow bold'
+format = '[$user]($style)'
+disabled = true
+show_always = true
+
+[hostname]
+ssh_only = false
+format = '[$ssh_symbol](green bold)@[$hostname](bold green) '
+# trim_at = '.companyname.com'
+disabled = true
+
+[directory]
+style = 'blue bold'
+truncation_length = 1
+truncation_symbol = ''
+
 
 [git_branch]
 format = "[$symbol$branch]($style) "
 
 [package]
 format = "[$symbol$version]($style) "
-symbol = " "
+symbol = "󰏓 "
 
 [python]
 format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
-symbol = " "
+symbol = "󰌠 "
 
 [nodejs]
 format = "[$symbol($version )]($style)"
+symbol = " "
 
 [php]
 format = "[$symbol($version )]($style)"
@@ -54,3 +77,11 @@ format = "[$symbol($version )]($style)"
 [golang]
 format = "[$symbol($version )]($style)"
 symbol = " "
+
+
+[lua]
+format = 'via [󰢱 $version](bold blue) '
+
+[battery]
+full_symbol =''
+charging_symbol = '󰂄 '

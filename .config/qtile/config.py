@@ -10,12 +10,11 @@ from settings.path import qtile_path
 from os import path
 import subprocess
 
-
-
 # @hook.subscribe.startup_once
 # def autostart():
 #     subprocess.call([path.join(qtile_path, 'autostart.sh')])
 #
+
 
 def is_running(process):
     """check if a process is already running (used in run_once).
@@ -23,7 +22,7 @@ def is_running(process):
     """
     s = subprocess.Popen(["ps", "axuw"], stdout=subprocess.PIPE)
     for x in s.stdout:
-        if re.search(process, x.decode('utf-8')):
+        if re.search(process, x.decode("utf-8")):
             return True
     return False
 
@@ -72,5 +71,5 @@ follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = True
 auto_fullscreen = True
-focus_on_window_activation = 'urgent'
-wmname = 'LG3D'
+focus_on_window_activation = "urgent"
+wmname = "LG3D"
