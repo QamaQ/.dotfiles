@@ -10,15 +10,16 @@ env:
 
 font:
   normal:
-    family: ComicShannsMono Nerd Font
+    # family: ComicShannsMono Nerd Font
     # family: JetBrainsMono Nerd Font
     # family: Mononoki Nerd Font
     # family: VictorMono Nerd Font
     # family: UbuntuMono Nerd Font
     # family: AnonymicePro Nerd font
     # family: CaskaydiaCove Nerd Font
+    family: Iosevka Nerd Font
     style: Regular
-  size: 14
+  size: 13
 window:
   opacity: 1
   decorations: full

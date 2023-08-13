@@ -83,7 +83,8 @@ M.cmp_kinds = {
 	Snippet = "",
 	Color = "",
 	Reference = "",
-	Folder = "",
+	-- Folder = "",
+	Folder = "󰉋",
 	Operator = "",
 	TypeParameter = "",
 	File = "",
@@ -105,7 +106,7 @@ M.cmp_kinds = {
 	Boolean = "",
 	Array = "",
 	Object = "",
-	Key = "",
+	Key = "",
 	Null = "",
 	EnumMember = "",
 	Struct = "",
@@ -116,7 +117,7 @@ M.ui = {
 	ArrowClosed = "",
 	ArrowOpen = "",
 	Lock = " ",
-	Circle = "",
+	Circle = "󰧞",
 	BigCircle = " ",
 	BigUnfilledCircle = " ",
 	Close = "",
@@ -151,42 +152,40 @@ M.ui = {
 	FolderOpen = "",
 	EmptyOpen = "",
 	Empty = "",
-	Term = "",
+	Term = "",
 	Atom = "󰹻",
 	borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
 }
 M.devicons = {
 	default_icon = {
 		icon = "󰈚",
-		name = "Default",
 	},
 
 	c = {
 		icon = "",
-		name = "c",
 		color = "#0288d1",
 	},
 
 	css = {
 		icon = "",
-		name = "css",
 		color = "#42a5f5",
 	},
 	html = {
-		icon = "",
-		name = "html",
+		icon = "󰌝",
 		color = "#e44d26",
 	},
 
 	lua = {
-		icon = "",
-		name = "lua",
+		icon = "󰢱",
 		color = "#42a5f5",
 	},
 	py = {
-		icon = "",
-		name = "py",
+		icon = "",
 		color = "#3c78aa",
+	},
+	tex = {
+		icon = "",
+		color = "#42a5f5",
 	},
 }
 return M

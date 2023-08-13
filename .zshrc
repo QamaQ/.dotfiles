@@ -4,6 +4,8 @@ export EDITOR=nvim
 
 ZSH_THEME="robbyrussell"
 
+#eval "$(starship init zsh)"
+
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
@@ -19,7 +21,8 @@ alias tree='exa -T'
 alias clone='git clone'
 alias clc='clear'
 alias tmx='tmux attach | tmux'
-alias vim='nvim'
+#alias vim='nvim'
+alias py='python'
 
 # Colors
 
@@ -69,3 +72,16 @@ codi() {
     hi NonText ctermfg=0 |\
     Codi $syntax" "$@"
 }
+
+
+# export
+export JAVA_HOME='/usr/lib/jvm/java-8-openjdk/'
+export PATH=$JAVA_HOME/bin:$PATH
+
+export ANDROID_SDK_ROOT='/opt/android-sdk'
+export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools/
+export PATH=$PATH:$ANDROID_SDK_ROOT/tools/bin/
+export PATH=$PATH:$ANDROID_ROOT/emulator
+export PATH=$PATH:$ANDROID_SDK_ROOT/tools/
+
+
