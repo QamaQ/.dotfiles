@@ -22,11 +22,11 @@ map_symbol = true
 symbol = ''
 success_symbol = ''
 
-#[custom.shell]
-#command = "echo $STARSHIP_SHELL"  # shows output of command
-#when = """ test "$STARSHIP_SHELL" != "fish" """
-#style = "dimmed blue"
-#format = "[$output]($style)"
+[custom.shell]
+command = "echo $STARSHIP_SHELL"  # shows output of command
+when = """ test "$STARSHIP_SHELL" != "fish" """
+style = "dimmed blue"
+format = "[$output]($style)"
 #shell =["bash"]
 
 [username]

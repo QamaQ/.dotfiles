@@ -10,7 +10,7 @@ TERM = "xterm-256color"
 size = 14
 
 [font.normal]
-family = "ComicShannsMono Nerd Font"
+family = "CasKaydiaCove Nerd Font"
 style = "Regular"
 
 [shell]

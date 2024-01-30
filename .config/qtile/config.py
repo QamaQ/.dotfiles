@@ -16,7 +16,7 @@ import subprocess
 #
 
 
-def is_running(process):
+def is_runing(process):
     """check if a process is already running (used in run_once).
     TODO: can be removed
     """
@@ -31,7 +31,7 @@ def execute_once(process):
     """run a process once.
     TODO: can be removed
     """
-    if not is_running(process):
+    if not is_runing(process):
         return subprocess.Popen(process.split())
 
 
