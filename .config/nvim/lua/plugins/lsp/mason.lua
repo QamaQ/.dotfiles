@@ -1,28 +1,27 @@
-return {
-  "williamboman/mason.nvim",
-  cmd = "Mason",
-  keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
-  build = ":MasonUpdate",
+local M = {
+  "williamboman/mason-lspconfig.nvim",
   dependencies = {
-    "williamboman/mason-lspconfig.nvim",
-    'stevearc/conform.nvim',
+    "williamboman/mason.nvim",
+    "nvim-lua/plenary.nvim",
   },
-
-  config = function()
-    local utils = require("utils.lsp")
-    local mason = require("mason")
-    local mason_lspconfig = require("mason-lspconfig")
-    local conform = require("conform")
-    mason.setup()
-    mason_lspconfig.setup({
-      ensure_installed = utils.mason_server()
-    })
-
-    conform.setup({
-      formatters_by_ft = {
-        python = { "black"}
-      }
-    })
-  end
 }
 
+M.servers = {
+	"lua_ls",
+	"pyright",
+	"tsserver"
+}
+
+function M.config()
+  require("mason").setup {
+    ui = {
+      border = "rounded",
+    },
+  }
+  require("mason-lspconfig").setup {
+    ensure_installed = M.servers,
+  }
+end
+
+
+return M
