@@ -112,7 +112,7 @@ function M.setup()
     CursorLine            = { bg = "#020202" },
     Todo                  = { fg = c.yellow, bold = true },
     -- Ignore           = { fg = e.disabled },
-    -- Underlined       = { fg = e.links, underline = true },
+    Underlined            = { fg = c.active, underline = true },
     Error                 = { fg = c.red, bold = true },
 
     Pmenu                 = { fg = c.active, bg = c.float }, -- popup menu
@@ -183,7 +183,7 @@ function M.setup()
     ['@variable.member.python']                = { fg = c.red, italic = false },
     --
     ['@constant.builtin']                      = { fg = c.fg },
-    ['@constant.builtin.python']              = { fg = c.cyan },
+    ['@constant.builtin.python']               = { fg = c.cyan },
     --
     ['@constructor']                           = { fg = c.blue, italic = false },
     ['@constructor.python']                    = { fg = c.blue, italic = false },

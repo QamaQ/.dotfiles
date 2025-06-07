@@ -1,3 +1,4 @@
+local icons = require("core.icons")
 local M = {
   "nvim-tree/nvim-tree.lua",
   version = "*",
@@ -43,7 +44,7 @@ local M = {
         side = "right", -- or left
         width = 30,
         preserve_window_proportions = false,
-        float = { enable = false },
+        float = { enable = true },
       },
       modified = { enable = true },
       renderer = {
@@ -53,10 +54,10 @@ local M = {
         icons = {
           glyphs = {
             default = "󰈚",
-            modified = ".",
+            modified = icons.misc.circule,
             folder = {
-              arrow_closed = "",
-              arrow_open = "",
+              arrow_closed = " ",
+              arrow_open = " ",
               default = "󰉋",
               empty = "󰉖",
               empty_open = "󰷏",

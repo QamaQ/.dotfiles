@@ -17,7 +17,7 @@ local M = {
         ['<CR>'] = { 'accept', 'fallback' },
       },
       sources = {
-        default = { "lsp", "buffer" },
+        default = { "lsp", "buffer", "path" },
       },
       completion = {
         menu = {

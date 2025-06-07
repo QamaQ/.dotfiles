@@ -1,3 +1,4 @@
+local icons = require("core.icons")
 local M = {
   'nvim-lualine/lualine.nvim',
   dependencies = { 'nvim-tree/nvim-web-devicons' }
@@ -23,7 +24,7 @@ M.init = function()
     shorting_target = 40, -- Shortens path to leave 40 spaces in the window
     -- for other components. (terrible name, any suggestions?)
     symbols = {
-      modified = '[+]',  -- Text to show when the file is modified.
+      modified = icons.misc.circule,  -- Text to show when the file is modified.
       readonly = '[-]',  -- Text to show when the file is non-modifiable or readonly.
       unnamed = '',      -- Text to show for unnamed buffers.
       newfile = '[New]', -- Text to show for newly created file before first write
@@ -43,8 +44,13 @@ M.init = function()
     -- Icon string ^ in table is ignored in filetype component
     padding = { left = 1, right = 0 }
   }
-
-
+  local function venv_name()
+    local venv = os.getenv("VIRTUAL_ENV")
+    if venv then
+      return "'" .. vim.fn.fnamemodify(venv, ":t") .. "'" -- muestra solo el nombre del folder
+    end
+    return ""
+  end
 
   local opts = {
     options = {
@@ -70,7 +76,7 @@ M.init = function()
       lualine_a = {},
       lualine_b = {},
       lualine_c = { 'branch', 'diff', filetype, filename, mode },
-      lualine_x = { 'diagnostics', 'encoding', 'location' },
+      lualine_x = { 'diagnostics', venv_name, 'encoding', 'location' },
       lualine_y = {},
       lualine_z = {}
     },

@@ -1,4 +1,8 @@
 local M = {}
+M.misc = {
+  circule = "󰧞"
+}
+
 
 M.kind = {
   -- Method = '󰊕',
