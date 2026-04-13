@@ -1,36 +1,24 @@
 local kinds = require("core.icons.kinds") -- Carga las definiciones de íconos personalizadas
 
 return {
-    'saghen/blink.cmp',
-    -- optional: provides snippets for the snippet source
-    dependencies = { 'rafamadriz/friendly-snippets' },
+    'saghen/blink.cmp', -- Define el plugin Blink (para autocompletado)
+    dependencies = {
+        -- Provides snippets for the snippet source
+        "rafamadriz/friendly-snippets",
+        {
+            "Kaiser-Yang/blink-cmp-dictionary",
+            dependencies = { "nvim-lua/plenary.nvim" },
+        },
+    },
+    -- version = "1.*",    -- Versión opcional del plugin (comentada)
+    lazy = false,                        -- Carga el plugin al inicio de Neovim
+    opts_extend = { "sources.default" }, -- Extiende opciones predeterminadas de fuentes
+    config = function()                  -- Función de configuración que se ejecuta cuando el plugin es cargado
+        require("blink.cmp").setup({     -- Inicializa y configura Blink
 
-    -- use a release tag to download pre-built binaries
-    version = '1.*',
-    -- AND/OR build from source
-    -- build = 'cargo build --release',
-    -- If you use nix, you can build from source with:
-    -- build = 'nix run .#build-plugin',
-
-    ---@module 'blink.cmp'
-    ---@type blink.cmp.Config
-    opts = {
             appearance = {
                 use_nvim_cmp_as_default = true, -- Usa nvim-cmp como el proveedor de completado predeterminado
                 kind_icons = kinds              -- Asigna los íconos personalizados para los tipos de símbolos
-            },
-            sources = {
-                -- add lazydev to your completion providers
-                -- default = { "lazydev", "lsp", "path", "snippets", "buffer" },
-                default = { "lsp", "path", "snippets", "buffer" },
-                providers = {
-                  -- lazydev = {
-                  --   name = "LazyDev",
-                  --   module = "lazydev.integrations.blink",
-                  --   -- make lazydev completions top priority (see `:h blink.cmp`)
-                  --   score_offset = 100,
-                  -- },
-                },
             },
             keymap = {
                 preset = 'none',                                                        -- Deshabilita los atajos de teclado preestablecidos
@@ -38,6 +26,9 @@ return {
                 ['<S-Tab>'] = { 'select_prev', 'fallback' },                            -- Shift+Tab: seleccionar elemento anterior o usar fallback
                 ['<Tab>'] = { 'select_next', 'fallback' },                              -- Tab: seleccionar elemento siguiente o usar fallback
                 ['<CR>'] = { 'accept', 'fallback' },                                    -- Enter: aceptar sugerencia o usar fallback
+            },
+            sources = {
+                -- default = { "lsp", "buffer", "path", "dictionary" },  -- Define las fuentes de completado predeterminadas
             },
             completion = {
                 menu = {
@@ -60,6 +51,8 @@ return {
                     }
                 }
             },
-    },
-    opts_extend = { "sources.default" }
+
+            fuzzy = { implementation = "lua" }, -- Configura la búsqueda difusa con implementación en Lua
+        })
+    end
 }
