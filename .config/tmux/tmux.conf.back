@@ -1,0 +1,152 @@
+tmux_dir="~/.config/tmux"
+
+# run '~/.config/tmux/plugins/tpm/tpm'
+
+
+set-option -sg escape-time 10
+set-option -g focus-events on
+
+
+# set vim-mode
+set-window-option -g mode-keys vi
+#keybindigs
+bind-key -T copy-mode-vi v send-keys -X begin-selection
+bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
+bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+
+#-------------------------------------------------------------------------------
+#   TMUX CONFIG
+#-------------------------------------------------------------------------------
+# NOTE: this overrides specify terminal capabilities you are overriding within tmux,
+# this should "normally" be "xterm-256color" or "tmux-256color" but in the case of
+# kitty it should be "xterm-kitty" so the solution/workaround here is to use the
+# value of $TERM. This might not work for all terminals.
+# see:
+# https://jdhao.github.io/2018/10/19/tmux_nvim_true_color/
+# https://sw.kovidgoyal.net/kitty/conf/#opt-kitty.term
+set -g default-terminal "${TERM}"
+set -as terminal-features ",${TERM}:RGB"
+#-------------------------------------------------------------------------------
+#  Terminal settings {{{1
+#-------------------------------------------------------------------------------
+# -> https://github.com/alacritty/alacritty/issues/1628
+# References:
+#   * https://github.com/neovim/neovim/pull/9097
+#   * https://github.com/tmux/tmux/issues/1492
+# Allow undercurls for terminals that support them.
+set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'
+# Allow coloured undercurls for terminals that support them.
+set -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'
+# kitty graphics protocol
+set -gq allow-passthrough on
+# }}}
+
+#-------------------------------------------------------------------------------
+#  Display {{{1
+#-------------------------------------------------------------------------------
+set-option    -g set-titles on
+set-option    -g set-titles-string '❐ #S ● #I'
+set-option    -g allow-rename on
+set-option    -g pane-base-index 1
+set-option    -g base-index 1
+set-option    -g monitor-activity on
+set-option   -sg repeat-time 600
+set-option    -g display-time 1000
+set-option    -g status-interval 5
+set-option   -wg automatic-rename on
+set-option    -g automatic-rename-format '#{b:pane_current_path}'
+set-option    -g monitor-activity on
+set-option    -g visual-activity off
+# Disable tmux statusline on zooming into a pane
+# @see https://gist.github.com/bartj3/6d3bd8efd2ceaf02d443
+# set-hook -g after-resize-pane "if-shell \"tmux list-panes -F '#F' | grep -q Z\" \"set -g status off\" \"set -g status on\""
+# }}}
+
+
+# set -g base-index 1
+# set -g pane-base-index 1
+# set-window-option -g pane-base-index 1
+# set-option -g renumber-windows on
+#
+
+
+
+set -g mouse on
+unbind C-b
+set -g prefix C-a
+bind C-a send-prefix
+bind r source-file ~/.config/tmux/tmux.conf \; display '~/.config/tmux/tmux.conf sourced'
+
+bind q kill-pane
+
+# create session
+bind C-c new-session
+
+# Find Session
+bind C-f command-prompt -p find-session 'switch-client -t %%'
+
+# split horizontally
+bind v split-window -v
+
+# split vertical
+bind h split-window -h
+
+# Shift + Alt vim keys to switch window
+bind -n M-H previous-window
+bind -n M-L next-window
+
+# ---- themes ----------------
+# color 
+tmx_bg="#212121"
+tmx_fg="#EEFFFF"
+tmx_gray="#454545"
+ansiWhite="#ffffff"
+ansiBlack="#000000"
+ansiBlue="#82AAFF"
+ansiCyan="#89DDFF"
+ansiGreen="#C3E88D"
+ansiMagenta="#C792EA"
+ansiRed="#FF5370"
+ansiYellow="#FFCB6B"
+tabInactive="#616161"
+
+
+set-option -g status on
+set-option -g status-position top
+set-option -g status-style fg=terminal
+set-option -g status-style bg=terminal
+set-option -g status-justify centre
+# set-option -g status-interval 1
+
+# NOTE: these use nested conditionals and "," and "}" must be escaped
+search_icon="#{?window_active,#{?window_zoomed_flag,#[fg=blue],},} "
+pane_count="#[default]#{?window_active,#[fg=$tabInactive](#{window_panes}),}"
+status_items="#[default]#{?window_bell_flag,#[fg=red]||| ,}$pane_count $search_icon"
+
+
+set -g status-left-length  80
+set -g status-right-length 70
+# Options -> ⧉ ❐
+set -g status-left "#{?client_prefix,#[fg=#ffffff bg=#22252B],#[fg=$tabInactive,bold]} ❐ #S "
+# alternate date format "%a %d %b"
+right_sep="#[default,dim,fg=#343d46]•"
+set -g status-right "#[fg=$tabInactive] %d %b "
+
+
+set-window-option -g window-status-style fg=$tabInactive
+set-window-option -g window-status-current-style fg=$ansiCyan
+# set-window-option -g window-status-current-format " #I. #[bold,italics]#T $status_items"
+# set-window-option -g window-status-format " #I. #[italics]#T $status_items"
+# set-window-option -g window-status-activity-style none # defaults to reverse
+set-window-option -g window-status-separator "#[fg=$tabInactive]"
+#
+# tmux commandline styling
+set-option -g message-style fg=yellow,bg=terminal,bold
+# styling when in command mode i.e. vi or emacs mode in tmux command line
+set-option -g message-command-style fg=green,bg=terminal,bold,blink
+# styling for the search indicator
+set-option -g mode-style bg=terminal,fg=brightgreen,bold
+
+
+set -g status on
+
