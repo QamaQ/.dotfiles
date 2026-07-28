@@ -1,0 +1,76 @@
+local augroup = vim.api.nvim_create_augroup("UserAutocmds", { clear = true })
+
+vim.api.nvim_create_autocmd("TextYankPost", {
+  group = augroup,
+  pattern = "*",
+  callback = function()
+    vim.highlight.on_yank({ higroup = "IncSearch", timeout = 200 })
+  end,
+})
+
+vim.api.nvim_create_autocmd("BufWritePost", {
+  group = augroup,
+  pattern = { "*.lua" },
+  callback = function()
+    local name = vim.fn.expand("%:p")
+    if name:match("plugins/") then
+      local plugin = vim.fn.expand("%:t:r")
+      if require("lazy.core.config").plugins[plugin] then
+        vim.cmd("Lazy reload " .. plugin)
+      end
+    end
+  end,
+})
+
+local autocmd = vim.api.nvim_create_autocmd
+
+-- user event that loads after UIEnter + only if file buf is there
+autocmd({ "UIEnter", "BufReadPost", "BufNewFile" }, {
+  group = vim.api.nvim_create_augroup("NvFilePost", { clear = true }),
+  callback = function(args)
+    local file = vim.api.nvim_buf_get_name(args.buf)
+    local buftype = vim.api.nvim_get_option_value("buftype", { buf = args.buf })
+
+    if not vim.g.ui_entered and args.event == "UIEnter" then
+      vim.g.ui_entered = true
+    end
+
+    if file ~= "" and buftype ~= "nofile" and vim.g.ui_entered then
+      vim.api.nvim_exec_autocmds("User", { pattern = "FilePost", modeline = false })
+      vim.api.nvim_del_augroup_by_name "NvFilePost"
+
+      vim.schedule(function()
+        vim.api.nvim_exec_autocmds("FileType", {})
+      end)
+    end
+  end,
+})
+
+vim.api.nvim_create_autocmd("TermOpen", {
+  group = augroup,
+  callback = function(args)
+    vim.wo.number = false
+    vim.wo.relativenumber = false
+    vim.wo.signcolumn = "no"
+    vim.wo.foldcolumn = "0"
+    vim.wo.cursorline = false
+    vim.bo[args.buf].undolevels = -1
+    vim.cmd("startinsert")
+  end,
+})
+
+vim.api.nvim_create_autocmd("TermClose", {
+  group = augroup,
+  callback = function(args)
+    local ok, term = pcall(require, "config.terminal")
+    if ok and term and term.buf == args.buf then
+      term.close()
+    end
+  end,
+})
+
+vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { buffer = true, desc = "Exit terminal mode" })
+
+vim.api.nvim_create_user_command("TSInstallAll", function()
+  vim.cmd("TSInstall all")
+end, {})
